@@ -31,7 +31,7 @@ public class CourseRepository {
     public int postCourse(Course course){
         return jdbcTemplate.update(
                 "INSERT INTO courses VALUES(?,?,?,?,?)",
-                course.getId(),
+                0,
                 course.getTitle(),
                 course.getSlug(),
                 course.getAuthorId(),
