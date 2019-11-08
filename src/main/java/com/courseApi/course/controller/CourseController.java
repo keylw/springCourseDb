@@ -5,10 +5,8 @@ import com.courseApi.course.model.Author;
 import com.courseApi.course.model.Course;
 import com.courseApi.course.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +26,11 @@ public class CourseController {
     @GetMapping("/courses/{slug}")
     public Course getCoursesBySlug(@PathVariable("slug") String slug){
         return courseRepository.getCourseBySlug(slug);
+    }
+
+    @PostMapping(value = "/courses/")
+    public int postCourse(@ModelAttribute Course course){
+        return courseRepository.postCourse(course);
     }
 
     @GetMapping("/authors/")

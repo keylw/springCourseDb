@@ -20,7 +20,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // Secure the endpoins with HTTP Basic authentication
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-                http.cors().and()
+        http
+                .cors().and()
+                .csrf().disable()
                 .httpBasic();
     }
 }

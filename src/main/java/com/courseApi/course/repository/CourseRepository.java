@@ -28,6 +28,16 @@ public class CourseRepository {
         return course == null? null : course.get(0) ;
     }
 
+    public int postCourse(Course course){
+        return jdbcTemplate.update(
+                "INSERT INTO courses VALUES(?,?,?,?,?)",
+                course.getId(),
+                course.getTitle(),
+                course.getSlug(),
+                course.getAuthorId(),
+                course.getCategory()
+        );
+    }
 }
 
 class CourseQueryMapper implements RowMapper<Course> {
