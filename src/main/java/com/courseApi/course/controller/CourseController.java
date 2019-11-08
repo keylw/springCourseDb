@@ -37,10 +37,10 @@ public class CourseController {
     }
 
     @PostMapping(value = "/courses/", consumes=APPLICATION_JSON_VALUE)
-    public int postCourse(HttpEntity<String> httpEntity) throws JsonProcessingException {
+    public Course postCourse(HttpEntity<String> httpEntity) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Course course = mapper.readValue(Objects.requireNonNull(httpEntity.getBody()), Course.class);
-        return courseRepository.postCourse(course);
+        return (courseRepository.postCourse(course) == 1) ? course : null;
     }
 
     @GetMapping("/authors/")
