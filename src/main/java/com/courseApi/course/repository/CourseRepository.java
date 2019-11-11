@@ -43,6 +43,18 @@ public class CourseRepository {
                 course.getCategory()
         );
     }
+
+    public int updateCourse(Course course){
+        course.setSlug(courseServices.createSlugFromTitle(course.getTitle()));
+        return jdbcTemplate.update(
+                "UPDATE courses SET title = ?, author_id = ?, category = ?, slug = ? WHERE id = ?",
+                course.getTitle(),
+                course.getAuthorId(),
+                course.getCategory(),
+                courseServices.createSlugFromTitle(course.getTitle()),
+                course.getId()
+        );
+    }
 }
 
 class CourseQueryMapper implements RowMapper<Course> {

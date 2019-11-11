@@ -43,6 +43,14 @@ public class CourseController {
         return (courseRepository.postCourse(course) == 1) ? course : null;
     }
 
+    @PutMapping(value = "/courses/{id}", consumes = APPLICATION_JSON_VALUE)
+    public Course putCourse(HttpEntity<String> httpEntity) throws JsonProcessingException {
+        System.out.println("put");
+        ObjectMapper mapper = new ObjectMapper();
+        Course course = mapper.readValue(Objects.requireNonNull(httpEntity.getBody()), Course.class);
+        return (courseRepository.updateCourse(course) == 1) ? course : null;
+    }
+
     @GetMapping("/authors/")
     public List<Author> getAuthors(){
         List<Author> a = new ArrayList<Author>();
