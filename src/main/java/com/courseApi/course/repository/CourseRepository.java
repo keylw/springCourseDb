@@ -2,6 +2,7 @@ package com.courseApi.course.repository;
 
 
 import com.courseApi.course.model.Course;
+import com.courseApi.course.services.CourseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,6 +14,9 @@ import java.util.List;
 
 @Repository
 public class CourseRepository {
+
+    @Autowired
+    CourseServices courseServices;
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -29,6 +33,7 @@ public class CourseRepository {
     }
 
     public int postCourse(Course course){
+        course.setSlug(courseServices.getSlugFromTitle(course.getTitle()));
         return jdbcTemplate.update(
                 "INSERT INTO courses VALUES(?,?,?,?,?)",
                 0,
