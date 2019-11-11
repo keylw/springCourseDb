@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CourseServices {
 
-    public String getSlugFromTitle(String title){
+    public String createSlugFromTitle(String title){
         String slug = title.replaceAll("/[^a-z0-9_]+/gi", "-");
         slug = slug.replaceAll("/^-|-$/g", "");
         slug = slug.toLowerCase();
