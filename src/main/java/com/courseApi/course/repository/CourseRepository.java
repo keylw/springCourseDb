@@ -33,7 +33,7 @@ public class CourseRepository {
     }
 
     public int postCourse(Course course){
-        course.setSlug(courseServices.getSlugFromTitle(course.getTitle()));
+        course.setSlug(courseServices.createSlugFromTitle(course.getTitle()));
         return jdbcTemplate.update(
                 "INSERT INTO courses VALUES(?,?,?,?,?)",
                 0,
